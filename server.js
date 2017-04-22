@@ -32,16 +32,19 @@ var reservations = [{
 // Routes
 // =============================================================
 
+// Home (home.html)
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Shows current and waitlist (tables.html)
 app.get("/add", function(req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
+  res.sendFile(path.join(__dirname, "add.html"));
 });
 
+// Makes a reservation (reserve.html)
 app.get("/add", function(req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
+  res.sendFile(path.join(__dirname, "make.html"));
 });
 
 // Search for Specific reservation (or all reservations) - provides JSON
