@@ -64,6 +64,11 @@ app.get("/api/:reservations?", function(req, res) {
   return res.json(reservations);
 });
 
+// Search waitlist - provides JSON
+app.get("/api/:reservations?", function(req, res) {
+  return res.json(waitlist);
+});
+
 // Create New Reservation - takes in JSON input
 app.post("/api/make", function(req, res) {
   var newreservation = req.body;
@@ -71,6 +76,7 @@ app.post("/api/make", function(req, res) {
 
   console.log(newreservation);
 
+// logic to push first 5 reservations to "reservations" array and the remainder to "waitlist" array
   reservations.push(newreservation);
 
   res.json(newreservation);
