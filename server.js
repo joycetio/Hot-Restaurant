@@ -29,6 +29,18 @@ var reservations = [{
 }
 ];
 
+var waitlist = [{
+  customerName: "Boris",
+  phoneNumber: "4567899123",
+  customerEmail: "greatlakes@gmail.com",
+  customerID: 3
+}, {
+  customerName: "Grover",
+  phoneNumber: "9876543222",
+  customerEmail: "notsogreatlakes@gmail.com",
+  customerID: 4
+}];
+
 // Routes
 // =============================================================
 
@@ -43,29 +55,17 @@ app.get("/add", function(req, res) {
 });
 
 // Makes a reservation (reserve.html)
-app.get("/add", function(req, res) {
+app.get("/make", function(req, res) {
   res.sendFile(path.join(__dirname, "make.html"));
 });
 
-// Search for Specific reservation (or all reservations) - provides JSON
-app.get("/api/:characters?", function(req, res) {
-  var chosen = req.params.reservations;
-
-  if (chosen) {
-    console.log(chosen);
-
-    for (var i = 0; i < reservations.length; i++) {
-      if (chosen === reservations[i].routeName) {
-       return res.json(reservations[i]);
-      }
-    }
-    return res.json(false);
-  }
+// Search for all reservations - provides JSON
+app.get("/api/:reservations?", function(req, res) {
   return res.json(reservations);
 });
 
 // Create New Reservation - takes in JSON input
-app.post("/api/new", function(req, res) {
+app.post("/api/make", function(req, res) {
   var newreservation = req.body;
   newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase();
 
