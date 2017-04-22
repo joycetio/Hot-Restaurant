@@ -22,7 +22,7 @@ var reservations = [{
   customerEmail: "howdy@gmail.com",
   customerID: 1
 }, {
-   customerName: "Qbert",
+  customerName: "Qbert",
   phoneNumber: "9876543211",
   customerEmail: "sunshine@gmail.com",
   customerID: 2
@@ -32,13 +32,16 @@ var reservations = [{
 // Routes
 // =============================================================
 
-// Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "view.html"));
+  res.sendFile(path.join(__dirname, "home.html"));
 });
 
 app.get("/add", function(req, res) {
-  res.sendFile(path.join(__dirname, "add.html"));
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+app.get("/add", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
 });
 
 // Search for Specific reservation (or all reservations) - provides JSON
