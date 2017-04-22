@@ -16,25 +16,18 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // =============================================================
-var characters = [{
-  routeName: "yoda",
-  name: "Yoda",
-  role: "Jedi Master",
-  age: 900,
-  forcePoints: 2000
+var reservations = [{
+  customerName: "Hubert",
+  phoneNumber: "1234567899",
+  customerEmail: "howdy@gmail.com",
+  customerID: 1
 }, {
-  routeName: "darthmaul",
-  name: "Darth Maul",
-  role: "Sith Lord",
-  age: 200,
-  forcePoints: 1200
-}, {
-  routeName: "obiwankenobi",
-  name: "Obi Wan Kenobi",
-  role: "Jedi Master",
-  age: 55,
-  forcePoints: 1350
-}];
+   customerName: "Qbert",
+  phoneNumber: "9876543211",
+  customerEmail: "sunshine@gmail.com",
+  customerID: 2
+}
+];
 
 // Routes
 // =============================================================
@@ -48,33 +41,33 @@ app.get("/add", function(req, res) {
   res.sendFile(path.join(__dirname, "add.html"));
 });
 
-// Search for Specific Character (or all characters) - provides JSON
+// Search for Specific reservation (or all reservations) - provides JSON
 app.get("/api/:characters?", function(req, res) {
-  var chosen = req.params.characters;
+  var chosen = req.params.reservations;
 
   if (chosen) {
     console.log(chosen);
 
-    for (var i = 0; i < characters.length; i++) {
-      if (chosen === characters[i].routeName) {
-       return res.json(characters[i]);
+    for (var i = 0; i < reservations.length; i++) {
+      if (chosen === reservations[i].routeName) {
+       return res.json(reservations[i]);
       }
     }
     return res.json(false);
   }
-  return res.json(characters);
+  return res.json(reservations);
 });
 
-// Create New Characters - takes in JSON input
+// Create New Reservation - takes in JSON input
 app.post("/api/new", function(req, res) {
-  var newcharacter = req.body;
-  newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+  var newreservation = req.body;
+  newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newcharacter);
+  console.log(newreservation);
 
-  characters.push(newcharacter);
+  reservations.push(newreservation);
 
-  res.json(newcharacter);
+  res.json(newreservation);
 });
 
 // Starts the server to begin listening
